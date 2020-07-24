@@ -4,7 +4,7 @@
   "description": "",
   "main": "src/loader.js",
   "scripts": {
-    "start": "pm2 start src/loader.js"
+    "start": "node app"
   },
   "repository": {
     "type": "git",
