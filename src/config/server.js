@@ -16,4 +16,4 @@ app.use('/register', registerRoute);
 app.use('/login',loginRoute);
 app.use('/mercadoria',mercadoriaRoutes);
 
-app.listen(3333);
+app.listen(process.env.PORT || 3000);
