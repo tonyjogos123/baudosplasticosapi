@@ -4,11 +4,11 @@
   "description": "",
   "main": "src/loader.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "pm2 start src/loader.js"
   },
   "repository": {
     "type": "git",
-    "url":"git+https://github.com/tonyjogos123/baudosplasticosapi.git"
+    "url": "git+https://github.com/tonyjogos123/baudosplasticosapi.git"
   },
   "keywords": [],
   "author": "",
@@ -22,6 +22,7 @@
     "jsonwebtoken": "^8.5.1",
     "multer": "^1.4.2",
     "mysql2": "^2.1.0",
+    "pm2": "^4.4.0",
     "sequelize": "^6.3.1"
   }
 }
