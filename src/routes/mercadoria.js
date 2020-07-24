@@ -45,8 +45,7 @@ router.post('/', upload.single('img'), login, async (req, res) => {
             precoCompra: precoCompraFormated,
             precoVenda: precoVendaFormated,
             nomeImg: req.file.filename
-        })
-        res.redirect('http://localhost:3000/dashboard/mercadorias')
+        });
     } catch (error) {
         res.json({ message: error.message, success: false })
     }
