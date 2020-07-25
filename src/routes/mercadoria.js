@@ -43,6 +43,11 @@ router.get('/:nome/:token', login, async (req, res) => {
     }
 })
 
+router.get('/img/:nome',(req,res) => {
+    const filepath = 'uploads/' + req.params.nome;
+    res.sendFile(filepath);
+})
+
 router.post('/', upload.single('img'), login, async (req, res) => {
     try {
         const precoCompraStr = req.body.precoCompra.replace(',', '.');
@@ -93,9 +98,6 @@ router.delete('/:id', login, async (req, res) => {
             const mercadoria = await Mercadoria.destroy({ where: { id: req.params.id } });
             res.json({ success: true })
         }
-        
-        
-
     } catch (error) {
         res.json({ message: error.message })
     }
