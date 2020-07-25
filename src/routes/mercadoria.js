@@ -75,16 +75,18 @@ router.put('/', login, async (req, res) => {
 
 router.delete('/:id', login, async (req, res) => {
     try {
-        const path = 'uploads/' + req.headers.nomeimg;
-        fs.unlink(path, async (err) => {
-            if (err) {
-                console.error(err)
-                res.json({ success: false })
-            } else {
-                const mercadoria = await Mercadoria.destroy({ where: { id: req.params.id } });
-                res.json({ success: true })
-            }
-        })
+        const mercadoria = await Mercadoria.findOne({where:{id:req.params.id}});
+        if(mercadoria.nomeImg){
+            const path = 'uploads/' + req.headers.nomeimg;
+            const deleted = await fs.unlinkSync(path);
+            const mercadoria = await Mercadoria.destroy({ where: { id: req.params.id } });
+            res.json({ success: true })
+        }else{
+            const mercadoria = await Mercadoria.destroy({ where: { id: req.params.id } });
+            res.json({ success: true })
+        }
+        
+        
 
     } catch (error) {
         res.json({ message: error.message })
