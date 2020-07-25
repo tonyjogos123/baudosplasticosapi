@@ -76,7 +76,6 @@ router.put('/', login, async (req, res) => {
             precoCompra: req.body.precoCompra,
             precoVenda: req.body.precoVenda,
         }, { where: { id: req.body.id } });
-        res.json({ mercadoria: mercadoria, success: true });
     } catch (error) {
         res.json({ message: error.message })
     }

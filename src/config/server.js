@@ -7,6 +7,7 @@ const cors = require('cors');
 app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:true}));
+app.use(express.methodOverride())
 
 const registerRoute = require('../routes/register');
 const loginRoute = require('../routes/login');
