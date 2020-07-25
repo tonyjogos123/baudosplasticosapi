@@ -43,7 +43,7 @@ router.get('/:nome/:token', login, async (req, res) => {
     }
 })
 
-router.get('/img/:nome',(req,res) => {
+router.get('/img/:nome/:token',login,(req,res) => {
     const filepath = 'uploads/' + req.params.nome;
     res.sendFile(filepath);
 })
