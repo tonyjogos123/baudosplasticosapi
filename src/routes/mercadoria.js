@@ -40,12 +40,21 @@ router.post('/', upload.single('img'), login, async (req, res) => {
         const precoCompraFormated = parseFloat(precoCompraStr);
         const precoVendaStr = req.body.precoVenda.replace(',', '.');
         const precoVendaFormated = parseFloat(precoVendaStr);
-        const mercadoria = await Mercadoria.create({
-            nome: req.body.nome,
-            precoCompra: precoCompraFormated,
-            precoVenda: precoVendaFormated,
-            nomeImg: req.file.filename
-        });
+        if (req.file) {
+            const mercadoria = await Mercadoria.create({
+                nome: req.body.nome,
+                precoCompra: precoCompraFormated,
+                precoVenda: precoVendaFormated,
+                nomeImg: req.file.filename
+            });
+        } else {
+            const mercadoria = await Mercadoria.create({
+                nome: req.body.nome,
+                precoCompra: precoCompraFormated,
+                precoVenda: precoVendaFormated,
+                nomeImg:''
+            });
+        }
     } catch (error) {
         res.json({ message: error.message, success: false })
     }
@@ -70,13 +79,13 @@ router.delete('/:id', login, async (req, res) => {
         fs.unlink(path, async (err) => {
             if (err) {
                 console.error(err)
-                res.json({success: false})
-            }else{
+                res.json({ success: false })
+            } else {
                 const mercadoria = await Mercadoria.destroy({ where: { id: req.params.id } });
                 res.json({ success: true })
             }
         })
-        
+
     } catch (error) {
         res.json({ message: error.message })
     }
