@@ -84,7 +84,7 @@ router.put('/', login, async (req, res) => {
 router.delete('/:id', login, async (req, res) => {
     try {
         const mercadoria = await Mercadoria.findOne({where:{id:req.params.id}});
-        if(mercadoria.nomeImg){
+        if(mercadoria.urlImg){
             const path = 'uploads/' + req.headers.nomeimg;
             const deleted = await fs.unlinkSync(path);
             const mercadoria = await Mercadoria.destroy({ where: { id: req.params.id } });
