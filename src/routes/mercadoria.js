@@ -43,9 +43,11 @@ router.get('/:nome/:token', login, async (req, res) => {
     }
 })
 
-router.get('/img/:nome/:token',login,(req,res) => {
-    const filepath = 'uploads/' + req.params.nome;
-    res.sendFile(filepath);
+router.get('/img/:nome',login,(req,res) => {
+    const path = 'uploads/' + req.params.nome
+    console.log(path);
+    const url = URL.createObjectURL(path);
+    res.json({url:url});
 })
 
 router.post('/', upload.single('img'), login, async (req, res) => {
