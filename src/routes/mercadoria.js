@@ -54,14 +54,14 @@ router.post('/', upload.single('img'), login, async (req, res) => {
                 nome: req.body.nome,
                 precoCompra: precoCompraFormated,
                 precoVenda: precoVendaFormated,
-                urlImg: req.file.path
+                nomeImg: req.file.path
             });
         } else {
             const mercadoria = await Mercadoria.create({
                 nome: req.body.nome,
                 precoCompra: precoCompraFormated,
                 precoVenda: precoVendaFormated,
-                urlImg:''
+                nomeImg:''
             });
         }
     } catch (error) {

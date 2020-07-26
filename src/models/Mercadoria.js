@@ -5,7 +5,7 @@ const Mercadoria = sequelize.define('mercadorias',{
     nome:Sequelize.STRING,
     precoCompra:Sequelize.DECIMAL(10,2),
     precoVenda:Sequelize.DECIMAL(10,2),
-    urlImg:Sequelize.STRING,
+    nomeImg:Sequelize.STRING,
     data:{type:Sequelize.DATE,defaultValue:Sequelize.NOW}
 })
 
