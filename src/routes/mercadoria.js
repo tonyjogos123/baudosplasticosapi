@@ -43,13 +43,6 @@ router.get('/:nome/:token', login, async (req, res) => {
     }
 })
 
-router.get('/img/:nome/:token',login,(req,res) => {
-    const path = 'uploads/' + req.params.nome
-    console.log(path);
-    const url = URL.createObjectURL(path);
-    res.json({url:url});
-})
-
 router.post('/', upload.single('img'), login, async (req, res) => {
     try {
         const precoCompraStr = req.body.precoCompra.replace(',', '.');
@@ -57,11 +50,12 @@ router.post('/', upload.single('img'), login, async (req, res) => {
         const precoVendaStr = req.body.precoVenda.replace(',', '.');
         const precoVendaFormated = parseFloat(precoVendaStr);
         if (req.file) {
+            const url = URL.createObjectURL('/uploads/' + req.file.originalname);
             const mercadoria = await Mercadoria.create({
                 nome: req.body.nome,
                 precoCompra: precoCompraFormated,
                 precoVenda: precoVendaFormated,
-                nomeImg: req.file.filename
+                nomeImg: url
             });
         } else {
             const mercadoria = await Mercadoria.create({
