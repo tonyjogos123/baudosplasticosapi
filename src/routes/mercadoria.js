@@ -50,12 +50,11 @@ router.post('/', upload.single('img'), login, async (req, res) => {
         const precoVendaStr = req.body.precoVenda.replace(',', '.');
         const precoVendaFormated = parseFloat(precoVendaStr);
         if (req.file) {
-            const url = URL.createObjectURL(req.file);
             const mercadoria = await Mercadoria.create({
                 nome: req.body.nome,
                 precoCompra: precoCompraFormated,
                 precoVenda: precoVendaFormated,
-                nomeImg: url
+                nomeImg: req.file.filename
             });
         } else {
             const mercadoria = await Mercadoria.create({
