@@ -43,7 +43,7 @@ router.get('/:nome/:token', login, async (req, res) => {
     }
 })
 
-router.get('/img/:nome',login,(req,res) => {
+router.get('/img/:nome/:token',login,(req,res) => {
     const path = 'uploads/' + req.params.nome
     console.log(path);
     const url = URL.createObjectURL(path);
