@@ -61,7 +61,7 @@ router.post('/', upload.single('img'), login, async (req, res) => {
                 nome: req.body.nome,
                 precoCompra: precoCompraFormated,
                 precoVenda: precoVendaFormated,
-                nomeImg:''
+                urlImg:''
             });
         }
     } catch (error) {
