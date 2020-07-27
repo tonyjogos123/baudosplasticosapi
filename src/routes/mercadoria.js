@@ -75,7 +75,21 @@ router.put('/',upload.single('img'), login, async (req, res) => {
         const precoCompraFormated = parseFloat(precoCompraStr);
         const precoVendaStr = req.body.precoVenda.replace(',', '.');
         const precoVendaFormated = parseFloat(precoVendaStr);
-        res.json(req.body)
+        if(req.file){
+            const mercadoria = await Mercadoria.update({
+                nome:req.body.nome,
+                precoCompra:precoCompraFormated,
+                precoVenda:precoVendaFormated,
+                nomeImg:req.file.filename
+            },{where:{id:req.body.id}});
+        }else{
+            const mercadoria = await Mercadoria.update({
+                nome:req.body.nome,
+                precoCompra:precoCompraFormated,
+                precoVenda:precoVendaFormated,
+                nomeImg:''
+            },{where:{id:req.body.id}});
+        }
     } catch (error) {
         res.json({ message: error.message })
     }
