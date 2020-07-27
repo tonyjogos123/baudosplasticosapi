@@ -69,7 +69,7 @@ router.post('/', upload.single('img'), login, async (req, res) => {
     }
 })
 
-router.put('/',upload.single('img'), login, async (req, res) => {
+router.post('/altera',upload.single('img'), login, async (req, res) => {
     try {
         const precoCompraStr = req.body.precoCompra.replace(',', '.');
         const precoCompraFormated = parseFloat(precoCompraStr);
