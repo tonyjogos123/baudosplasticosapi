@@ -69,13 +69,13 @@ router.post('/', upload.single('img'), login, async (req, res) => {
     }
 })
 
-router.put('/', login, async (req, res) => {
+router.put('/',upload.single('img'), login, async (req, res) => {
     try {
-        const mercadoria = await Mercadoria.update({
-            nome: req.body.nome,
-            precoCompra: req.body.precoCompra,
-            precoVenda: req.body.precoVenda,
-        }, { where: { id: req.body.id } });
+        const precoCompraStr = req.body.precoCompra.replace(',', '.');
+        const precoCompraFormated = parseFloat(precoCompraStr);
+        const precoVendaStr = req.body.precoVenda.replace(',', '.');
+        const precoVendaFormated = parseFloat(precoVendaStr);
+        res.json(req.body)
     } catch (error) {
         res.json({ message: error.message })
     }
