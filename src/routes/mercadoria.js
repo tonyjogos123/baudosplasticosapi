@@ -87,7 +87,7 @@ router.put('/',upload.single('img'), login, async (req, res) => {
                 nome:req.body.nome,
                 precoCompra:precoCompraFormated,
                 precoVenda:precoVendaFormated,
-                nomeImg:''
+                nomeImg:req.body.nomeImg
             },{where:{id:req.body.id}});
         }
     } catch (error) {
