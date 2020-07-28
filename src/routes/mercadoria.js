@@ -36,7 +36,7 @@ router.get('/:id/:token', login, async (req, res) => {
 
 router.get('/busca/:nome/:token', login, async (req, res) => {
     try {
-        const mercadorias = await Mercadoria.findAll({ where: { nome: { [Op.like]: req.params.nome + '%' } } });
+        const mercadoria = await Mercadoria.findAll({ where: { nome: { [Op.like]: req.params.nome + '%' } } });
         res.json({ mercadorias: mercadoria, success: true })
     } catch (error) {
         res.json({ message: error.message })
