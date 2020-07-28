@@ -13,4 +13,15 @@ router.get('/:token',login,async(req,res) => {
     }
 })
 
+router.post('/',login,(req,res) => {
+    try {
+        const nota = await Nota.create({
+            total:req.body.total
+        });
+        res.json(nota);
+    } catch (error) {
+        res.json({success: false,erro:error.message})
+    }
+})
+
 module.exports = router;
