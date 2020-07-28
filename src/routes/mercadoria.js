@@ -37,7 +37,7 @@ router.get('/:id/:token', login, async (req, res) => {
 router.get('/busca/:nome/:token', login, async (req, res) => {
     try {
         const mercadorias = await Mercadoria.findAll({ where: { nome: { [Op.like]: req.params.nome + '%' } } });
-        res.json({ mercadorias: mercadorias, success: true })
+        res.json({ mercadorias: mercadoria, success: true })
     } catch (error) {
         res.json({ message: error.message })
     }
@@ -56,7 +56,6 @@ router.post('/', upload.single('img'), login, async (req, res) => {
                 precoVenda: precoVendaFormated,
                 nomeImg: req.file.filename
             });
-            res.json({success: true})
         } else {
             const mercadoria = await Mercadoria.create({
                 nome: req.body.nome,
@@ -64,7 +63,6 @@ router.post('/', upload.single('img'), login, async (req, res) => {
                 precoVenda: precoVendaFormated,
                 nomeImg:''
             });
-            res.json({success: true})
         }
     } catch (error) {
         res.json({ message: error.message, success: false })
