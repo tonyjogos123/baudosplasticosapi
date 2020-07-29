@@ -10,6 +10,4 @@ const Admin = sequelize.define('admins',{
 
 Admin.sync({force:false})
 
-Admin.hasMany(Nota);
-
 module.exports = Admin;
