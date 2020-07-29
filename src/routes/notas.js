@@ -13,7 +13,7 @@ router.get('/:token',login,async(req,res) => {
     }
 })
 
-router.post('/',login,(req,res) => {
+router.post('/',login,async(req,res) => {
     try {
         const nota = await Nota.create({
             total:req.body.total
