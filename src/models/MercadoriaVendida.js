@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize');
 const sequelize = require('../config/database');
 
-const MercadoriaVendida = sequelize.define('mercadoria_vendida',{
+const MercadoriaVendida = sequelize.define('mercadoria_vendidas',{
     id_mercadoria:Sequelize.INTEGER,
     quantidade:Sequelize.INTEGER,
     notaId:{
