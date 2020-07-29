@@ -24,9 +24,9 @@ router.get('/:id/:token', login, async (req, res) => {
 router.post('/', login, async (req, res) => {
     try {
         const vendas = await MercadoriaVendida.create({
-            id_mercadoria: req.body.idMercadoria,
+            id_mercadoria: req.body.id_mercadoria,
             quantidade: req.body.quantidade,
-            id_nota: req.body.idNota
+            id_nota: req.body.id_nota
         });
         res.json({ success: true, s })
     } catch (error) {
