@@ -6,8 +6,10 @@ const MercadoriaVendida = sequelize.define('mercadoria_vendida',{
     quantidade:Sequelize.INTEGER,
     notaId:{
         type:Sequelize.INTEGER,
-        references:'notas',
-        reference_key:'id'
+        references:{
+            model:'notas',
+            key:'id'
+        }
     }
 })
 
