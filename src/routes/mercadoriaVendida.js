@@ -28,7 +28,7 @@ router.post('/', login, async (req, res) => {
             quantidade: req.body.quantidade,
             id_nota: req.body.id_nota
         });
-        res.json({ success: true, s })
+        res.json({ success: true ,venda:vendas});
     } catch (error) {
         res.json({ success: false, message: error.message })
     }
