@@ -7,6 +7,6 @@ const MercadoriaVendida = sequelize.define('mercadoria_vendida',{
     id_nota:Sequelize.INTEGER
 })
 
-MercadoriaVendida.sync({force:false})
+MercadoriaVendida.sync({force:true})
 
 module.exports = MercadoriaVendida;
