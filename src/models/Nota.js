@@ -8,8 +8,8 @@ const Nota = sequelize.define('notas', {
     data: { type: Sequelize.DATE, defaultValue: Sequelize.NOW }
 })
 
-Nota.sync({ force: true })
-
 Nota.hasMany(MercadoriaVendida,{foreignKey:'notaId'});
+
+Nota.sync({ force: true })
 
 module.exports = Nota;
