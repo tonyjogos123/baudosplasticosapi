@@ -2,11 +2,10 @@ const Sequelize = require('sequelize');
 const sequelize = require('../config/database');
 const Admin = require('./Admin');
 const MercadoriaVendida = require('./MercadoriaVendida');
-const d = new Date();
 
 const Nota = sequelize.define('notas', {
     total: Sequelize.FLOAT,
-    data: { type: Sequelize.STRING, defaultValue: ''}
+    data: { type: Sequelize.STRING, allowNull: false, defaultValue: Sequelize.NOW() }
 })
 
 Nota.hasMany(MercadoriaVendida);
