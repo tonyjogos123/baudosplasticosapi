@@ -5,7 +5,7 @@ const MercadoriaVendida = require('./MercadoriaVendida');
 
 const Nota = sequelize.define('notas', {
     total: Sequelize.FLOAT,
-    data: { type: Sequelize.DATE, defaultValue: Sequelize.NOW }
+    data: { type: Sequelize.DATE, defaultValue: Date.now() }
 })
 
 Nota.hasMany(MercadoriaVendida);
