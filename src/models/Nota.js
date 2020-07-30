@@ -6,7 +6,7 @@ const d = new Date();
 
 const Nota = sequelize.define('notas', {
     total: Sequelize.FLOAT,
-    data: { type: Sequelize.DATE, defaultValue: Date.now() }
+    data: { type: Sequelize.STRING, defaultValue: ''}
 })
 
 Nota.hasMany(MercadoriaVendida);
