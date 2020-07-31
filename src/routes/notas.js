@@ -3,24 +3,35 @@ const router = express.Router();
 const login = require("../middleware/login");
 const Nota = require('../models/Nota');
 const MercadoriaVendida = require('../models/MercadoriaVendida');
+const Sequelize = require('sequelize');
+const Op = Sequelize.Op;
 
-router.get('/:token',login,async(req,res) => {
+router.get('/:token', login, async (req, res) => {
     try {
         const notas = await Nota.findAll();
-        res.json({success:true,notas:notas});
+        res.json({ success: true, notas: notas });
     } catch (error) {
-        res.json({success: false,erro:error.message})
+        res.json({ success: false, erro: error.message })
     }
 })
 
-router.post('/',login,async(req,res) => {
+router.get('/:data/:token', async (req, res) => {
+    try {
+        const notas = await Nota.findAll({ where: { data: { [Op.between]: req.params.data } } })
+        res.json({ success: true, notas: notas })
+    } catch (error) {
+        res.json({ success: false, erro: error.message })
+    }
+})
+
+router.post('/', login, async (req, res) => {
     try {
         const nota = await Nota.create({
-            total:req.body.total
+            total: req.body.total
         });
         res.json(nota);
     } catch (error) {
-        res.json({success: false,erro:error.message})
+        res.json({ success: false, erro: error.message })
     }
 })
 
