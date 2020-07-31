@@ -15,9 +15,9 @@ router.get('/:token', login, async (req, res) => {
     }
 })
 
-router.get('/:data/:token', async (req, res) => {
+router.get('/:datainicial/:datafinal/:token', async (req, res) => {
     try {
-        const notas = await Nota.findAll({ where: { data: { [Op.between]: req.params.data } } })
+        const notas = await Nota.findAll({ where: { data: { [Op.between]: [req.params.datainicial,req.params.datafinal] } } })
         res.json({ success: true, notas: notas })
     } catch (error) {
         res.json({ success: false, erro: error.message })
