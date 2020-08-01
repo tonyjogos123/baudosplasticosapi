@@ -14,7 +14,7 @@ router.get('/:token', login, async (req, res) => {
 
 router.get('/:id/:token', login, async (req, res) => {
     try {
-        const vendas = await MercadoriaVendida.findAll({ where: { id: req.params.id } });
+        const vendas = await MercadoriaVendida.findAll({ where: { notaId: req.params.id } });
         res.json({ success: true, vendas: vendas })
     } catch (error) {
         res.json({ success: false, message: error.message })
