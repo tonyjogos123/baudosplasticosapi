@@ -15,9 +15,18 @@ router.get('/:token', login, async (req, res) => {
     }
 })
 
-router.get('/:datainicial/:datafinal/:token',login, async (req, res) => {
+router.get("/limite/:limit/:token", async (req, res) => {
     try {
-        const notas = await Nota.findAll({ where: { data: { [Op.between]: [req.params.datainicial,req.params.datafinal] } } })
+        const notas = await Sequelize.query("SELECT id,total,data FROM notas LIMIT " + req.params.limit);
+        res.json({ success: true, notas: notas })
+    } catch (error) {
+        res.json({ success: false, erro: error.message })
+    }
+})
+
+router.get('/:datainicial/:datafinal/:token', login, async (req, res) => {
+    try {
+        const notas = await Nota.findAll({ where: { data: { [Op.between]: [req.params.datainicial, req.params.datafinal] } } })
         res.json({ success: true, notas: notas })
     } catch (error) {
         res.json({ success: false, erro: error.message })
