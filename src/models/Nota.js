@@ -10,6 +10,6 @@ const Nota = sequelize.define('notas', {
 
 Nota.hasMany(MercadoriaVendida);
 
-Nota.sync({ force: true })
+Nota.sync({ force: false })
 
 module.exports = Nota;
