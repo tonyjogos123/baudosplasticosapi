@@ -17,7 +17,7 @@ router.get('/:token', login, async (req, res) => {
 
 router.get("/limite/:limit/:token", async (req, res) => {
     try {
-        const notas = await Sequelize.query("SELECT id,total,data FROM notas LIMIT " + req.params.limit,{type:Sequelize.QueryTypes.SELECT});
+        const notas = await Nota.findAll({limit:req.params.limit});
         res.json({ success: true, notas: notas })
     } catch (error) {
         res.json({ success: false, erro: error.message })
