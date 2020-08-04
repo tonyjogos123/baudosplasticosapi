@@ -56,7 +56,7 @@ router.post('/', upload.single('img'), login, async (req, res) => {
                 precoVenda: precoVendaFormated,
                 nomeImg: req.file.filename
             });
-            res.json({ success: true })
+            res.redirect('/mercadoria');
         } else {
             const mercadoria = await Mercadoria.create({
                 nome: req.body.nome,
