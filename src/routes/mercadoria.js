@@ -21,13 +21,13 @@ router.get('/:token', login, async (req, res) => {
         const mercadorias = await Mercadoria.findAll();
         res.json({ mercadorias: mercadorias, success: true })
     } catch (error) {
-        res.json({ message: error.message ,success: false})
+        res.json({ message: error.message, success: false })
     }
 })
 
 router.get('/:id/:token', login, async (req, res) => {
     try {
-        const mercadoria = await Mercadoria.findOne({where:{id:req.params.id}});
+        const mercadoria = await Mercadoria.findOne({ where: { id: req.params.id } });
         res.json({ mercadoria: mercadoria, success: true })
     } catch (error) {
         res.json({ message: error.message })
@@ -56,41 +56,43 @@ router.post('/', upload.single('img'), login, async (req, res) => {
                 precoVenda: precoVendaFormated,
                 nomeImg: req.file.filename
             });
+            res.json({ success: true })
         } else {
             const mercadoria = await Mercadoria.create({
                 nome: req.body.nome,
                 precoCompra: precoCompraFormated,
                 precoVenda: precoVendaFormated,
-                nomeImg:''
+                nomeImg: ''
             });
+            res.json({ success: false })
         }
     } catch (error) {
         res.json({ message: error.message, success: false })
     }
 })
 
-router.post('/altera',upload.single('img'), login, async (req, res) => {
+router.post('/altera', upload.single('img'), login, async (req, res) => {
     try {
         const precoCompraStr = req.body.precoCompra.replace(',', '.');
         const precoCompraFormated = parseFloat(precoCompraStr);
         const precoVendaStr = req.body.precoVenda.replace(',', '.');
         const precoVendaFormated = parseFloat(precoVendaStr);
-        if(req.file){
-                const path = 'uploads/' + req.body.nomeImg;
-                const deleted = await fs.unlinkSync(path);
-                const mercadoria = await Mercadoria.update({
-                nome:req.body.nome,
-                precoCompra:precoCompraFormated,
-                precoVenda:precoVendaFormated,
-                nomeImg:req.file.filename
-            },{where:{id:req.body.id}});
-        }else{
+        if (req.file) {
+            const path = 'uploads/' + req.body.nomeImg;
+            const deleted = await fs.unlinkSync(path);
             const mercadoria = await Mercadoria.update({
-                nome:req.body.nome,
-                precoCompra:precoCompraFormated,
-                precoVenda:precoVendaFormated,
-                nomeImg:req.body.nomeImg
-            },{where:{id:req.body.id}});
+                nome: req.body.nome,
+                precoCompra: precoCompraFormated,
+                precoVenda: precoVendaFormated,
+                nomeImg: req.file.filename
+            }, { where: { id: req.body.id } });
+        } else {
+            const mercadoria = await Mercadoria.update({
+                nome: req.body.nome,
+                precoCompra: precoCompraFormated,
+                precoVenda: precoVendaFormated,
+                nomeImg: req.body.nomeImg
+            }, { where: { id: req.body.id } });
         }
     } catch (error) {
         res.json({ message: error.message })
@@ -99,13 +101,13 @@ router.post('/altera',upload.single('img'), login, async (req, res) => {
 
 router.delete('/:id', login, async (req, res) => {
     try {
-        const mercadoria = await Mercadoria.findOne({where:{id:req.params.id}});
-        if(mercadoria.nomeImg){
+        const mercadoria = await Mercadoria.findOne({ where: { id: req.params.id } });
+        if (mercadoria.nomeImg) {
             const path = 'uploads/' + req.headers.nomeimg;
             const deleted = await fs.unlinkSync(path);
             const mercadoria = await Mercadoria.destroy({ where: { id: req.params.id } });
             res.json({ success: true })
-        }else{
+        } else {
             const mercadoria = await Mercadoria.destroy({ where: { id: req.params.id } });
             res.json({ success: true })
         }
