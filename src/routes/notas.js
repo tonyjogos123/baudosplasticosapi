@@ -15,9 +15,9 @@ router.get('/:token', login, async (req, res) => {
     }
 })
 
-router.get("/limite/:limit/:token", async (req, res) => {
+router.get("/limite/:limite/:token", async (req, res) => {
     try {
-        const notas = await Nota.findAndCountAll({ offset: 0, limit: req.params.limit });
+        const notas = await Nota.findAll({ limit: req.params.limite, offset: 0 });
         res.json({ success: true, notas: notas })
     } catch (error) {
         res.json({ success: false, erro: error.message })
