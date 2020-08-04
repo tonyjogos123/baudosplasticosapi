@@ -64,7 +64,7 @@ router.post('/', upload.single('img'), login, async (req, res) => {
                 precoVenda: precoVendaFormated,
                 nomeImg: ''
             });
-            res.json({ success: false })
+            res.json({ success: true })
         }
     } catch (error) {
         res.json({ message: error.message, success: false })
