@@ -56,7 +56,7 @@ router.post('/', upload.single('img'), login, async (req, res) => {
                 precoVenda: precoVendaFormated,
                 nomeImg: req.file.filename
             });
-            res.redirect('http://bdpapiserver-com.umbler.net/mercadorias');
+            res.redirect('http://localhost:3000/dashboard/mercadorias');
         } else {
             const mercadoria = await Mercadoria.create({
                 nome: req.body.nome,
@@ -64,7 +64,7 @@ router.post('/', upload.single('img'), login, async (req, res) => {
                 precoVenda: precoVendaFormated,
                 nomeImg: ''
             });
-            res.redirect("http://bdpapiserver-com.umbler.net/mercadorias");
+            res.redirect("http://localhost:3000/dashboard/mercadorias");
         }
     } catch (error) {
         res.json({ message: error.message, success: false })
