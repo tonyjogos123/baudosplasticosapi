@@ -8,7 +8,7 @@ const Op = Sequelize.Op;
 
 router.get('/:token', login, async (req, res) => {
     try {
-        const notas = await Nota.findAll({order:['nome','ASC']});
+        const notas = await Nota.findAll();
         res.json({ success: true, notas: notas });
     } catch (error) {
         res.json({ success: false, erro: error.message })
