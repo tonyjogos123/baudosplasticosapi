@@ -15,6 +15,15 @@ router.get('/:token', login, async (req, res) => {
     }
 })
 
+router.get('/:id/:token', login, async (req, res) => {
+    try {
+        const notas = await Nota.findOne({ where: { id: req.params.id } });
+        res.json({ success: true, notas: notas });
+    } catch (error) {
+        res.json({ success: false, erro: error.message })
+    }
+})
+
 router.get("/limite/:limite/:token", async (req, res) => {
     try {
         const notas = await Nota.findAll();
