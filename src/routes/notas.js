@@ -17,7 +17,7 @@ router.get('/:token', login, async (req, res) => {
 
 router.get("/limite/:limite/:token", async (req, res) => {
     try {
-        const notas = await Nota.findAll({ limit: req.params.limite});
+        const notas = await Nota.findAll({ limit: req.params.limite,order:'"id" ASC'});
         res.json({ success: true, notas: notas })
     } catch (error) {
         res.json({ success: false, erro: error.message })
