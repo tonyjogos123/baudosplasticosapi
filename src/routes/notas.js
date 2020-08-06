@@ -24,6 +24,15 @@ router.get('/:id/:token', login, async (req, res) => {
     }
 })
 
+router.get('/limite/:token', (req, res) => {
+    try {
+        const notas = await Sequelize.query("SELECT * FROM notas LIMIT 10");
+        res.json({ success: true, notas: notas });
+    } catch (error) {
+        res.json({ success: false, erro: error.message })
+    }
+})
+
 router.get("/limite/:limite/:token", async (req, res) => {
     try {
         const notas = await Nota.findAll();
