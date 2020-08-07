@@ -16,7 +16,7 @@ router.get('/:token', login, async (req, res) => {
     }
 })
 
-router.post('/gerarpdf', (req, res) => {
+router.post('/gerarpdf',login, (req, res) => {
 
     pdf.create(req.body.corpoHtml, {}).toBuffer((err, buffer) => {
         if (err) return res.status(500).json(err)
