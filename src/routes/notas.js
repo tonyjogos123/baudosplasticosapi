@@ -18,9 +18,13 @@ router.get('/:token', login, async (req, res) => {
 
 router.post('/gerarpdf', login, (req, res) => {
 
-    pdf.create(req.body.corpoHtml).toStream(function (err, stream) {
-        stream.pipe(fs.createWriteStream('./foo.pdf'));
-    });
+    pdf.create(req.body.corpoHtml,{}).toFile("./meupdflindo.pdf",(err,res) => {
+        if(err){
+            console.log('asdasdasdads');
+        }else{
+            console.log(res)
+        }
+    })
 
 })
 
