@@ -16,13 +16,11 @@ router.get('/:token', login, async (req, res) => {
     }
 })
 
-router.post('/gerarpdf',login, (req, res) => {
+router.post('/gerarpdf', login, (req, res) => {
 
-    pdf.create(req.body.corpoHtml, {}).toBuffer((err, buffer) => {
-        if (err) return res.status(500).json(err)
-
-        res.end(buffer);
-    })
+    pdf.create(req.body.corpoHtml).toStream(function (err, stream) {
+        stream.pipe(fs.createWriteStream('./foo.pdf'));
+    });
 
 })
 
