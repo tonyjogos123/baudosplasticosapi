@@ -16,8 +16,14 @@ router.get('/:token', login, async (req, res) => {
     }
 })
 
-router.get('/download',(req,res) => {
-    res.download('hello.txt');
+router.post('/gerarpdf', (req, res) => {
+
+    pdf.create(req.body.corpoHtml, {}).toBuffer((err, buffer) => {
+        if (err) return res.status(500).json(err)
+
+        res.end(buffer);
+    })
+
 })
 
 router.get('/:id/:token', login, async (req, res) => {
