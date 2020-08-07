@@ -5,6 +5,7 @@ const Nota = require('../models/Nota');
 const MercadoriaVendida = require('../models/MercadoriaVendida');
 const Sequelize = require('sequelize');
 const Op = Sequelize.Op;
+const pdf = require('html-pdf');
 
 router.get('/:token', login, async (req, res) => {
     try {
@@ -13,6 +14,10 @@ router.get('/:token', login, async (req, res) => {
     } catch (error) {
         res.json({ success: false, erro: error.message })
     }
+})
+
+router.get('/download',(req,res) => {
+    res.download('hello.txt');
 })
 
 router.get('/:id/:token', login, async (req, res) => {
