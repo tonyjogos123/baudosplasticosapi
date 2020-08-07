@@ -16,18 +16,6 @@ router.get('/:token', login, async (req, res) => {
     }
 })
 
-router.post('/gerarpdf', login, (req, res) => {
-
-    pdf.create(req.body.corpoHtml,{}).toFile("./meupdflindo.pdf",(err,res) => {
-        if(err){
-            console.log('asdasdasdads');
-        }else{
-            console.log(res)
-        }
-    })
-
-})
-
 router.get('/:id/:token', login, async (req, res) => {
     try {
         const notas = await Nota.findOne({ where: { id: req.params.id } });
