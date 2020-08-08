@@ -18,10 +18,9 @@ router.get('/:token', login, async (req, res) => {
 })
 
 router.post("/pdf",login,(req,res) => {
-    let html = fs.readFileSync('www.google.com', 'utf8');
-    pdf.create(html,options).toBuffer('./novopdf.pdf',(err,buffer) => {
-        if(err) return res.status(500).json(err)
-        res.end(buffer)  
+    let html = fs.readFileSync(__dirname + "/novopdf.html");
+    pdf.create(html).toStream((err,stream) => {
+        stream.pipe(fs.createReadStream('./foo.pdf'));
     })
 })
 
