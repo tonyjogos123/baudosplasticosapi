@@ -7,7 +7,6 @@ const Sequelize = require('sequelize');
 const Op = Sequelize.Op;
 const pdf = require('html-pdf');
 const fs = require('fs');
-const { iRegexp } = require('sequelize/types/lib/operators');
 
 router.get('/:token', login, async (req, res) => {
     try {
