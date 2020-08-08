@@ -19,7 +19,7 @@ router.get('/:token', login, async (req, res) => {
 
 router.post("/pdf",login,(req,res) => {
     const documentoHtml = req.body.corpo;
-    pdf.create(documentoHtml,{}).toFile("./meupdflindao.pdf",(err,res) => {
+    pdf.create(documentoHtml,{}).toFile("./uploads/meupdflindao.pdf",(err,res) => {
         if(err){
             console.log("Uma erro aconteceu")
         }else{
