@@ -23,7 +23,7 @@ router.post("/pdf",login,(req,res) => {
         if(err){
             console.log("Uma erro aconteceu")
         }else{
-            res.download('http://bdpapiserver-com.umbler.net/meupdflindao.pdf');
+            res.writeHead(200,{"Content-disposition":"attachment; filename=meupdflindao.pdf"});
         }
     })
 })
