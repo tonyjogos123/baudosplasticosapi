@@ -22,10 +22,9 @@ router.post("/pdf",login,(req,res) => {
     pdf.create(documentoHtml,{}).toFile("./uploads/meupdflindao.pdf",(err,res) => {
         if(err){
             console.log("Uma erro aconteceu")
-        }else{
-            res.json({success: true})
         }
     })
+    res.json({success: true});
 })
 
 router.get('/:id/:token', login, async (req, res) => {
