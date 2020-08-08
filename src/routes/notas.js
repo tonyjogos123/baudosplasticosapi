@@ -23,7 +23,7 @@ router.post("/pdf",login,(req,res) => {
         if(err){
             console.log("Uma erro aconteceu")
         }else{
-            res.writeHead(200,{"Content-disposition":"attachment; filename=meupdflindao.pdf"});
+            res.download(__dirname + '/uploads/meupdflindao.pdf')
         }
     })
 })
