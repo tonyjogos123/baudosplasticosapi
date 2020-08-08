@@ -18,6 +18,7 @@ router.get('/:token', login, async (req, res) => {
 })
 
 router.post("/pdf",login,(req,res) => {
+    var html = fs.readFileSync('./test/businesscard.html', 'utf8');
     pdf.create("Alguma Coisa",{}).toFile('./novopdf.pdf',(err,res) => {
         if (err) return console.log(err);
         console.log(res)
