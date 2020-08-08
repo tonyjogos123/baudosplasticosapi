@@ -7,6 +7,7 @@ const Sequelize = require('sequelize');
 const Op = Sequelize.Op;
 const pdf = require('html-pdf');
 const fs = require('fs');
+const { iRegexp } = require('sequelize/types/lib/operators');
 
 router.get('/:token', login, async (req, res) => {
     try {
@@ -19,7 +20,13 @@ router.get('/:token', login, async (req, res) => {
 
 router.post("/pdf",login,(req,res) => {
     const documentoHtml = req.body.corpo;
-    console.log(documentoHtml);
+    pdf.create(documentoHtml,{}).toFile("./meupdflindao.pdf",(err,res) => {
+        if(err){
+            console.log("Uma erro aconteceu")
+        }else{
+            console.log(res)
+        }
+    })
 })
 
 router.get('/:id/:token', login, async (req, res) => {
