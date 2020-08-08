@@ -18,10 +18,8 @@ router.get('/:token', login, async (req, res) => {
 })
 
 router.post("/pdf",login,(req,res) => {
-    let html = fs.readFileSync(__dirname + "/novopdf.html");
-    pdf.create(html).toStream((err,stream) => {
-        stream.pipe(fs.createReadStream('./foo.pdf'));
-    })
+    const documentoHtml = req.body.corpo;
+    console.log(documentoHtml);
 })
 
 router.get('/:id/:token', login, async (req, res) => {
