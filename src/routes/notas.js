@@ -5,7 +5,8 @@ const Nota = require('../models/Nota');
 const MercadoriaVendida = require('../models/MercadoriaVendida');
 const Sequelize = require('sequelize');
 const Op = Sequelize.Op;
-const pdf = require('html-pdf');
+const PDFDocument = require('pdfkit');
+const fs = require('fs');
 
 router.get('/:token', login, async (req, res) => {
     try {
@@ -14,6 +15,13 @@ router.get('/:token', login, async (req, res) => {
     } catch (error) {
         res.json({ success: false, erro: error.message })
     }
+})
+
+router.post("/pdf",login,(req,res) => {
+    const doc = new PDFDocument;
+    doc.pipe(fs.createWriteStream('output.pdf'));
+    doc.font('arial').fontSize(25).text('Some Text with an ebedded font',100,100);
+    doc.end();
 })
 
 router.get('/:id/:token', login, async (req, res) => {
