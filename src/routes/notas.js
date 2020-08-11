@@ -17,25 +17,17 @@ router.get('/:token', login, async (req, res) => {
     }
 })
 
-router.post("/pdf", login, async(req, res) => {
-    if (fs.existsSync("./uploads/pdfnota.pdf")) {
-        const deleted = await fs.unlinkSync("./uploads/pdfnota.pdf");
-        const documentoHtml = req.body.corpo;
-        pdf.create(documentoHtml, {}).toFile("./uploads/pdfnota.pdf", (err, res) => {
-            if (err) {
-                console.log("Uma erro aconteceu")
-            }
-        })
-        res.json({ success: true });
-    } else {
-        const documentoHtml = req.body.corpo;
-        pdf.create(documentoHtml, {}).toFile("./uploads/pdfnota.pdf", (err, res) => {
-            if (err) {
-                console.log("Uma erro aconteceu")
-            }
-        })
-        res.json({ success: true });
-    }
+router.post("/pdf", login, async (req, res) => {
+
+
+    const documentoHtml = req.body.corpo;
+    pdf.create(documentoHtml, {}).toFile("./uploads/pdfnota.pdf", (err, res) => {
+        if (err) {
+            console.log("Uma erro aconteceu")
+        }
+    })
+    res.json({ success: true });
+
 })
 
 router.get('/:id/:token', login, async (req, res) => {
