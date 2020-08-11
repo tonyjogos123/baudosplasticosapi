@@ -25,8 +25,8 @@ router.post("/pdf", login, async (req, res) => {
         if (err) {
             console.log("Uma erro aconteceu")
         }
-        res.json({ success: true });
     })
+    res.json({ success: true });
 
 })
 
