@@ -19,7 +19,9 @@ router.get('/:token', login, async (req, res) => {
 
 router.post("/pdf", login, async (req, res) => {
 
-
+    if(fs.existsSync("./uploads/pdfnota.pdf")){
+        console.log("Existe")
+    }
     const documentoHtml = req.body.corpo;
     pdf.create(documentoHtml, {}).toFile("./uploads/pdfnota.pdf", (err, res) => {
         if (err) {
