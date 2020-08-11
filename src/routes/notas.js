@@ -24,9 +24,10 @@ router.post("/pdf", login, async(req, res) => {
         pdf.create(documentoHtml, {}).toFile("./uploads/pdfnota.pdf", (err, res) => {
             if (err) {
                 console.log("Uma erro aconteceu")
+            }else{
+                res.json({ success: true });
             }
         })
-        res.json({ success: true });
     } else {
         const documentoHtml = req.body.corpo;
         pdf.create(documentoHtml, {}).toFile("./uploads/pdfnota.pdf", (err, res) => {
