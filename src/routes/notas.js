@@ -4,10 +4,10 @@ const login = require("../middleware/login");
 const Nota = require('../models/Nota');
 const MercadoriaVendida = require('../models/MercadoriaVendida');
 const Sequelize = require('sequelize');
+const sequelize = require('../config/database');
 const Op = Sequelize.Op;
 const pdf = require('html-pdf');
 const fs = require('fs');
-const { QueryTypes } = require('sequelize');
 
 router.get('/:token', login, async (req, res) => {
     try {
@@ -39,7 +39,7 @@ router.get('/:id/:token', login, async (req, res) => {
 
 router.get("/limite/:limite/:token", async (req, res) => {
     try {
-        const notas = await Sequelize.query("SELECT * FROM notas");
+        const notas = await sequelize.query("SELECT * FROM notas");
         res.json({ success: true, notas: notas })
     } catch (error) {
         res.json({ success: false, erro: error.message })
