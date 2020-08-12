@@ -39,7 +39,7 @@ router.get('/:id/:token', login, async (req, res) => {
 
 router.get("/limite/:limite/:token",login, async (req, res) => {
     try {
-        const notas = await sequelize.query(`SELECT * FROM notas ORDER BY data DESC LIMIT ${req.params.limite}`);
+        const notas = await sequelize.query(`SELECT * FROM notas LIMIT ${req.params.limite}`);
         res.json({ success: true, notas: notas })
     } catch (error) {
         res.json({ success: false, erro: error.message })
