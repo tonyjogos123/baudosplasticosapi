@@ -7,6 +7,7 @@ const Sequelize = require('sequelize');
 const Op = Sequelize.Op;
 const pdf = require('html-pdf');
 const fs = require('fs');
+const { QueryTypes } = require('sequelize');
 
 router.get('/:token', login, async (req, res) => {
     try {
@@ -47,7 +48,7 @@ router.get("/limite/:limite/:token", async (req, res) => {
 
 router.get('/:datainicial/:datafinal/:token', login, async (req, res) => {
     try {
-        const notas = await Nota.findAll({ where: { data: { [Op.between]: [req.params.datainicial, req.params.datafinal] } } })
+        const notas = await Nota.findAll({ where: { data: { [Op.between]: [req.params.datainicial, req.params.datafinal] } },order:["data","ASC"] })
         res.json({ success: true, notas: notas })
     } catch (error) {
         res.json({ success: false, erro: error.message })
