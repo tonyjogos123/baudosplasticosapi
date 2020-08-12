@@ -39,7 +39,7 @@ router.get('/:id/:token', login, async (req, res) => {
 
 router.get("/limite/:limite/:token", async (req, res) => {
     try {
-        const notas = await Nota.findAll();
+        const notas = await Nota.findAll({ limit: req.params.limite });
         res.json({ success: true, notas: notas })
     } catch (error) {
         res.json({ success: false, erro: error.message })
@@ -48,7 +48,7 @@ router.get("/limite/:limite/:token", async (req, res) => {
 
 router.get('/:datainicial/:datafinal/:token', login, async (req, res) => {
     try {
-        const notas = await Nota.findAll({ where: { data: { [Op.between]: [req.params.datainicial,req.params.datafinal ] } } })
+        const notas = await Nota.findAll({ where: { data: { [Op.between]: [req.params.datainicial, req.params.datafinal] } } })
         res.json({ success: true, notas: notas })
     } catch (error) {
         res.json({ success: false, erro: error.message })
