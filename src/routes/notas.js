@@ -11,7 +11,7 @@ const { QueryTypes } = require('sequelize');
 
 router.get('/:token', login, async (req, res) => {
     try {
-        const notas = await Nota.findAll({order:["data","DESC"]});
+        const notas = await Nota.findAll();
         res.json({ success: true, notas: notas });
     } catch (error) {
         res.json({ success: false, erro: error.message })
