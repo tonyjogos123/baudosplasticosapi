@@ -18,8 +18,6 @@ router.get('/:token', login, async (req, res) => {
 })
 
 router.post("/pdf", login, async (req, res) => {
-
-
     const documentoHtml = req.body.corpo;
     pdf.create(documentoHtml, {}).toFile("./uploads/pdfnota.pdf", (err, res) => {
         if (err) {
@@ -27,9 +25,6 @@ router.post("/pdf", login, async (req, res) => {
         }
     })
     res.json({ success: true });
-
-
-
 })
 
 router.get('/:id/:token', login, async (req, res) => {
