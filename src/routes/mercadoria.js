@@ -4,6 +4,7 @@ const Mercadoria = require('../models/Mercadoria');
 const fs = require('fs');
 const login = require('../middleware/login');
 const Sequelize = require('sequelize');
+const sequelize = require('../config/database');
 const Op = Sequelize.Op;
 const multer = require('multer');
 const storage = multer.diskStorage({
@@ -28,6 +29,15 @@ router.get('/:token', login, async (req, res) => {
 router.get('/:id/:token', login, async (req, res) => {
     try {
         const mercadoria = await Mercadoria.findOne({ where: { id: req.params.id } });
+        res.json({ mercadoria: mercadoria, success: true })
+    } catch (error) {
+        res.json({ message: error.message })
+    }
+})
+
+router.get('/limite/:limite/:token', login, async (req, res) => {
+    try {
+        const mercadoria = await sequelize.query("SELECT * FROM mercadorias LIMIT " + req.params.limite)
         res.json({ mercadoria: mercadoria, success: true })
     } catch (error) {
         res.json({ message: error.message })
