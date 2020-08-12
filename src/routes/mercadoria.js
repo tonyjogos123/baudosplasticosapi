@@ -35,9 +35,9 @@ router.get('/:id/:token', login, async (req, res) => {
     }
 })
 
-router.get('/limite/:limite/:token', login, async (req, res) => {
+router.get('/limite/:limite/:pulos/:token', login, async (req, res) => {
     try {
-        const mercadoria = await sequelize.query(`SELECT * FROM mercadorias ORDER BY nome ASC LIMIT ${req.params.limite}`);
+        const mercadoria = await sequelize.query(`SELECT * FROM mercadorias ORDER BY nome ASC LIMIT ${req.params.limite} ` + `OFFSET ` + req.params.pulos);
         res.json({ mercadoria: mercadoria, success: true })
     } catch (error) {
         res.json({ message: error.message })
