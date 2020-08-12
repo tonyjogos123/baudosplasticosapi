@@ -57,7 +57,8 @@ router.get('/:datainicial/:datafinal/:token', login, async (req, res) => {
 router.post('/', login, async (req, res) => {
     try {
         const nota = await Nota.create({
-            total: req.body.total
+            total: req.body.total,
+            cliente: req.body.cliente
         });
         res.json(nota);
     } catch (error) {
