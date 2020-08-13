@@ -3,7 +3,7 @@ const sequelize = require('../config/database');
 
 const MercadoriaVendida = sequelize.define('mercadoria_vendidas', {
     id_mercadoria: Sequelize.INTEGER,
-    quantidade: Sequelize.INTEGER,
+    quantidade: {type:Sequelize.INTEGER,allowNull: false,defaultValue: 0.00},
     desconto:Sequelize.FLOAT,
     notaId: {
         type: Sequelize.INTEGER,
@@ -14,6 +14,6 @@ const MercadoriaVendida = sequelize.define('mercadoria_vendidas', {
     }
 })
 
-MercadoriaVendida.sync({ force: false })
+MercadoriaVendida.sync({ force: true })
 
 module.exports = MercadoriaVendida;
