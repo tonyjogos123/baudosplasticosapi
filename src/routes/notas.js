@@ -48,7 +48,7 @@ router.get("/limite/:limite/:pulos/:token",login, async (req, res) => {
 
 router.get('/:datainicial/:datafinal/:token', login, async (req, res) => {
     try {
-        const notas = await sequelize.query(`SELECT * FROM notas WHERE data BETWEEN ${req.params.datainicial} AND ${req.params.datafinal}`);
+        const notas = await sequelize.query("SELECT * FROM notas WHERE data BETWEEN " + req.params.datainicial + " AND " + req.params.datafinal);
         res.json({ success: true, notas: notas })
     } catch (error) {
         res.json({ success: false, erro: error.message })
