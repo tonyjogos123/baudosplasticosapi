@@ -90,7 +90,7 @@ router.post('/altera', upload.single('img'), login, async (req, res) => {
         if (req.file) {
             if (fs.existsSync("uploads/" + req.body.nomeImg)) {
                 const path = "uploads/" + req.body.nomeImg;
-                const deleted = await fs.unlinkSync(path);
+                const deleted = fs.unlinkSync(path);
                 const mercadoria = await Mercadoria.update({
                     nome: req.body.nome,
                     precoCompra: precoCompraFormated,
