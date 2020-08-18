@@ -88,15 +88,16 @@ router.post('/altera', upload.single('img'), login, async (req, res) => {
         const precoVendaStr = req.body.precoVenda.replace(',', '.');
         const precoVendaFormated = parseFloat(precoVendaStr);
         if (req.file) {
-            if(fs.existsSync(`./uploads/${req.body.nomeImg}`)){
-                res.json("Existe")
+            if (fs.existsSync(`./uploads/${req.body.nomeImg}`)) {
+                fs.unlinkSync(`./uploads/${req.body.nomeImg}`);
+                const mercadoria = await Mercadoria.update({
+                    nome: req.body.nome,
+                    precoCompra: precoCompraFormated,
+                    precoVenda: precoVendaFormated,
+                    nomeImg: req.file.filename
+                }, { where: { id: req.body.id } });
             }
-            const mercadoria = await Mercadoria.update({
-                nome: req.body.nome,
-                precoCompra: precoCompraFormated,
-                precoVenda: precoVendaFormated,
-                nomeImg: req.file.filename
-            }, { where: { id: req.body.id } });
+
         } else {
             const mercadoria = await Mercadoria.update({
                 nome: req.body.nome,
