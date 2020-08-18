@@ -66,7 +66,7 @@ router.post('/', upload.single('img'), login, async (req, res) => {
                 precoVenda: precoVendaFormated,
                 nomeImg: req.file.filename
             });
-            
+
         } else {
             const mercadoria = await Mercadoria.create({
                 nome: req.body.nome,
@@ -74,7 +74,7 @@ router.post('/', upload.single('img'), login, async (req, res) => {
                 precoVenda: precoVendaFormated,
                 nomeImg: ''
             });
-            
+
         }
     } catch (error) {
         res.json({ message: error.message, success: false })
@@ -88,14 +88,23 @@ router.post('/altera', upload.single('img'), login, async (req, res) => {
         const precoVendaStr = req.body.precoVenda.replace(',', '.');
         const precoVendaFormated = parseFloat(precoVendaStr);
         if (req.file) {
-            const path = req.body.nomeImg;
-            const deleted = await fs.unlinkSync(path);
-            const mercadoria = await Mercadoria.update({
-                nome: req.body.nome,
-                precoCompra: precoCompraFormated,
-                precoVenda: precoVendaFormated,
-                nomeImg: req.file.filename
-            }, { where: { id: req.body.id } });
+            if (fs.existsSync("uploads/" + req.body.nomeImg)) {
+                const path = "uploads/" + req.body.nomeImg;
+                const deleted = await fs.unlinkSync(path);
+                const mercadoria = await Mercadoria.update({
+                    nome: req.body.nome,
+                    precoCompra: precoCompraFormated,
+                    precoVenda: precoVendaFormated,
+                    nomeImg: req.file.filename
+                }, { where: { id: req.body.id } });
+            } else {
+                const mercadoria = await Mercadoria.update({
+                    nome: req.body.nome,
+                    precoCompra: precoCompraFormated,
+                    precoVenda: precoVendaFormated,
+                    nomeImg: req.file.filename
+                }, { where: { id: req.body.id } });
+            }
         } else {
             const mercadoria = await Mercadoria.update({
                 nome: req.body.nome,
