@@ -88,7 +88,7 @@ router.post('/altera', upload.single('img'), login, async (req, res) => {
         const precoVendaStr = req.body.precoVenda.replace(',', '.');
         const precoVendaFormated = parseFloat(precoVendaStr);
         if (req.file) {
-            const path = 'uploads/' + req.body.nomeImg;
+            const path = './uploads/' + req.body.nomeImg;
             const deleted = await fs.unlinkSync(path);
             const mercadoria = await Mercadoria.update({
                 nome: req.body.nome,
