@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize');
 
-const sequelize = new Sequelize('tiranotaapidb','adminbdpapi','55425610a',{
-    host:'mysql669.umbler.com',
+const sequelize = new Sequelize('tiranotaapidb','b148c18bfd1f4e','478ebbf4',{
+    host:'us-cdbr-east-03.cleardb.com',
     dialect:'mysql',
     raw:true,
     define: {
