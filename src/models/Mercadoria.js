@@ -9,6 +9,6 @@ const Mercadoria = sequelize.define('mercadorias', {
     data: { type: Sequelize.DATE, defaultValue: Sequelize.NOW }
 })
 
-Mercadoria.sync({ force: false })
+Mercadoria.sync({ force: true })
 
 module.exports = Mercadoria;
