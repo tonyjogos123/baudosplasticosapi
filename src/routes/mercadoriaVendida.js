@@ -27,7 +27,8 @@ router.post('/', login, async (req, res) => {
             id_mercadoria: req.body.id_mercadoria,
             quantidade: req.body.quantidade,
             notaId: req.body.notaId,
-            desconto:req.body.desconto
+            desconto:req.body.desconto,
+            precoDia:req.body.precoDia
         });
         res.json({ success: true ,venda:vendas});
     } catch (error) {
