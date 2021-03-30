@@ -61,7 +61,7 @@ router.post('/', login, async (req, res) => {
             total: req.body.total,
             cliente: req.body.cliente,
             metodoPagamento: req.body.metodoPagamento,
-            descontoPorcentagem: req.body.descontoPorcentagem
+            descontoPorcento: req.body.descontoPorcentagem
         });
         res.json(nota);
     } catch (error) {
